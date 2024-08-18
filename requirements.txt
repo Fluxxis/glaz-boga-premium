@@ -1,0 +1,4 @@
+colorama
+termcolor
+discord-webhook
+requests
